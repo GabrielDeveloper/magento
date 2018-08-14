@@ -58,5 +58,4 @@ class IntegrityController
             echo json_encode($info);
         }
     }
-
 }

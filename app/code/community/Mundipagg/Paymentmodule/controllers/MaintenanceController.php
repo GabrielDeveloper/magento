@@ -7,7 +7,6 @@ use Mundipagg\Integrity\IntegrityController;
 
 class Mundipagg_Paymentmodule_MaintenanceController extends Mage_Core_Controller_Front_Action
 {
-
     public function preDispatch()
     {
         parent::preDispatch();
@@ -28,9 +27,20 @@ class Mundipagg_Paymentmodule_MaintenanceController extends Mage_Core_Controller
         $integrityController->showGeneralInfo("Module info", $generalInformation);
 
         //showing integrity check result
-        $integrityController->showNonEmptyInfo("Warning! New files were added to module directories!", $integrityCheck['newFiles']);
-        $integrityController->showNonEmptyInfo("Warning! Module files were modified!", $integrityCheck['alteredFiles']);
-        $integrityController->showNonEmptyInfo("Warning! Module files become unreadable!", $integrityCheck['unreadableFiles']);
+        $integrityController->showNonEmptyInfo(
+            "Warning! New files were added to module directories!",
+            $integrityCheck['newFiles']
+        );
+
+        $integrityController->showNonEmptyInfo(
+            "Warning! Module files were modified!",
+            $integrityCheck['alteredFiles']
+        );
+
+        $integrityController->showNonEmptyInfo(
+            "Warning! Module files become unreadable!",
+            $integrityCheck['unreadableFiles']
+        );
 
         $integrityController->showGeneralInfo(
             'File List ('.count($integrityCheck['files']).')',

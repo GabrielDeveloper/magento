@@ -68,7 +68,7 @@ class IntegrityEngine
 
         $md5s = [];
         foreach ($rawLines as $line) {
-            $md5s = array_merge($md5s,$this->filterFilename(
+            $md5s = array_merge($md5s, $this->filterFilename(
                 $this->generateFilesPath($line, $ignored)
             ));
         }
@@ -82,11 +82,11 @@ class IntegrityEngine
             return [key($checkSumArray)];
         }
         $data = serialize($checkSumArray);
-        $data = explode('";b:1;}',$data);
+        $data = explode('";b:1;}', $data);
 
         $files = [];
         foreach ($data as $line) {
-            $raw = explode('"',$line);
+            $raw = explode('"', $line);
             if (count($raw) > 1) {
                 $files[] = end($raw);
             }
@@ -99,7 +99,7 @@ class IntegrityEngine
     {
         if ($this->hasPermissions($modmanFilePath)) {
             $modmanRawData = file_get_contents($modmanFilePath);
-            $rawLines = explode("\n",$modmanRawData);
+            $rawLines = explode("\n", $modmanRawData);
 
             return $this->getFileListFromArrayData($rawLines, $ignoredDir, self::MODMAN_CHECK);
         }
@@ -126,14 +126,14 @@ class IntegrityEngine
 
                 $line = $rawLine;
                 if ($fileOrigin == self::MODMAN_CHECK) {
-                    $line = array_values(array_filter(explode(' ',$rawLine)));
+                    $line = array_values(array_filter(explode(' ', $rawLine)));
                     if ($line[0] == 'modman'){
                         continue;
                     }
                     $line = './' . $line[1];
                 }
 
-                $list = array_merge($list , $this->listFilesOnDir($line, $ignoredDir));
+                $list = array_merge($list, $this->listFilesOnDir($line, $ignoredDir));
             }
         }
 
